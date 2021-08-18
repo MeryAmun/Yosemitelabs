@@ -6,17 +6,20 @@ import {
   Container,
 } from '@chakra-ui/react';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
-import Navigation from './navigation';
-import Home from './home';
-import SearchBar from './searchBar';
+import Navigation from './components/navigation';
+import Home from './components/home';
+import PokemonList from './components/pokemonList';
+import Card from './components/card';
 
 
 
 function App() {
+
+ 
   return (
     <BrowserRouter>
     <Navigation/>
-    <SearchBar/>
+    
       <Box textAlign="center" fontSize="xl">
         <Grid minH="10vh" p={3}>
           <ColorModeSwitcher justifySelf="flex-end" />
@@ -27,6 +30,8 @@ function App() {
           <Box>
             <Switch>
            <Route path='/' exact={true} component={Home} />
+           <Route path='/list'  component={PokemonList} />
+           <Route path='/card'  component={Card} />
             </Switch>
 
           </Box>
