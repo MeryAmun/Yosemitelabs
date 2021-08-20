@@ -31,13 +31,6 @@ import {
     </Link></MenuItem>
       <MenuItem><Link
       color="teal.500"
-      href="/details"
-      fontSize="2xl"
-     style={{ textDecoration: 'none'}}>
-      Pokemon Details
-    </Link></MenuItem>
-      <MenuItem><Link
-      color="teal.500"
       href="/team"
       fontSize="2xl"
      style={{ textDecoration: 'none'}}>

@@ -4,16 +4,13 @@ import {useState} from 'react';
 import {
     Input,
      Center,
-     Box,
      Container,
-     Link
-  } from '@chakra-ui/react';
-  import Card from './card'
+  } from '@chakra-ui/react'
 import PokemonList from './pokemonList';
 
 function Search({pokemon}) {
   const [searchText, setSearchText] = useState({});
-  //const [pokemon, setPokemon] = useState('');
+ 
 
   const getPokemon = (e) => {
     e.preventDefault();
@@ -37,8 +34,8 @@ Axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`).then(response => {
     <Input type="text"  className="form-select" id="validationDefaultLocation" 
        onChange={(e) => {
         setSearchText(e.target.value)}}
-    placeholder="Search Pokemon" 
-    width="200px" />
+    placeholder="Search Pokemon by name or Id" 
+    width="300px" />
   
     </form>
   </Center>

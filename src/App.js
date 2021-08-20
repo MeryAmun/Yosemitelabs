@@ -15,6 +15,7 @@ import MyTeam from './components/myTeam';
 
 
 
+
 function App() {
 
  
@@ -36,6 +37,7 @@ function App() {
            <Route path='/card'  component={Card} />
            <Route path='/pokemon/:id'  component={PokemonDetails} />
            <Route path='/team'  component={MyTeam} />
+           
             </Switch>
 
           </Box>
