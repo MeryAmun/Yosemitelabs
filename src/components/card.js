@@ -1,25 +1,38 @@
 import React from 'react';
+import Axios from 'axios';
+import {useState} from 'react';
 import {
-    Text,
+    Stat,
+     StatLabel,
+     StatNumber,
+     StatHelpText,
      Box,
-     SimpleGrid,
-     Link
+     Image
   } from '@chakra-ui/react';
 
-export default function Card(props) {
-    const {pokemon} = props
+
+export default function Card({pokemon}) {
+    
+    
+
     return (
-        <Box  cursor="pointer" height="300px" width="200px">
-        <SimpleGrid columns={2} spacing={10} mt={10}>
-        <Text>Name</Text>
-        <Text><Link
-        color=""
-        href="https://pokeapi.co/api/v2/ability/110/"
-        fontSize="2xl"
-        textDecoration="none">
-        Contact Pokemon
-        </Link></Text>
-        </SimpleGrid>
+        <Box cursor="pointer" height="300px" width="300px" pt={10}>
+        
+        {
+            <Stat p={10} key={pokemon.id}>
+  <StatLabel>{pokemon.name}</StatLabel>
+  <Box d="flex" mt="2" alignItems="center">
+    <Image src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${pokemon.id}.png`} 
+    width="300px"
+    alt={pokemon.name} />    
         </Box>
+  
+  <StatNumber>order:{pokemon.order}</StatNumber>
+  <StatNumber>weigth:{pokemon.weight}</StatNumber>
+  <StatHelpText>
+</StatHelpText>
+</Stat>
+        }
+</Box>
     )
 }

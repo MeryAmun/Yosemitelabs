@@ -10,6 +10,8 @@ import Navigation from './components/navigation';
 import Home from './components/home';
 import PokemonList from './components/pokemonList';
 import Card from './components/card';
+import PokemonDetails from './components/pokemonDetails';
+import MyTeam from './components/myTeam';
 
 
 
@@ -30,8 +32,10 @@ function App() {
           <Box>
             <Switch>
            <Route path='/' exact={true} component={Home} />
-           <Route path='/list'  component={PokemonList} />
+           <Route path='/pokemonlist'  component={PokemonList} />
            <Route path='/card'  component={Card} />
+           <Route path='/pokemon/:id'  component={PokemonDetails} />
+           <Route path='/team'  component={MyTeam} />
             </Switch>
 
           </Box>

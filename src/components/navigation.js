@@ -25,7 +25,7 @@ import {
       color="teal.500"
       href="/"
       fontSize="2xl"
-      textDecoration="none"
+     style={{ textDecoration: 'none'}}
       >
       Home
     </Link></MenuItem>
@@ -33,15 +33,15 @@ import {
       color="teal.500"
       href="/details"
       fontSize="2xl"
-      textDecoration="none">
+     style={{ textDecoration: 'none'}}>
       Pokemon Details
     </Link></MenuItem>
       <MenuItem><Link
       color="teal.500"
-      href="/"
+      href="/team"
       fontSize="2xl"
-      textDecoration="none">
-      Your Pokemon
+     style={{ textDecoration: 'none'}}>
+      My Team
     </Link></MenuItem>
     </MenuList>
   </Portal>

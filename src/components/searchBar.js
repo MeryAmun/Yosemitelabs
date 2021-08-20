@@ -7,16 +7,16 @@ import {
 
 function SearchBar(props) {
   const {onSearch} = props;
-  const [search, setSearch] = useState('');
+  const [searchText, setSearchText] = useState('');
 
   const handleInput = (e) => {
     const text = e.target.value;
-    setSearch(text)
+    setSearchText(text)
   }
 
   const handleEnterKeyPressed = (e) => {
     if(e.key === 'Enter'){
-      onSearch(search)
+      onSearch(searchText)
     }
   }
 
@@ -24,7 +24,7 @@ function SearchBar(props) {
     <Center>
     <Input type="text" onChange={handleInput} 
     onKeyPress={handleEnterKeyPressed}
-    value={search} 
+    value={searchText} 
     placeholder="Search Pokemon" 
     width="200px" />
   </Center>
