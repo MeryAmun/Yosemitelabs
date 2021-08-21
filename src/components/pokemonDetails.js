@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 import {useState, useEffect} from 'react';
 import Axios from 'axios';
 import {
@@ -7,7 +8,6 @@ import {
     Stat,
     StatHelpText,
       Box,
-      Link,
       Button,
       Text,
       Heading
@@ -107,7 +107,7 @@ const addPokemon = (setdetails) => {
       >
       <Link
     color=""
-    href={"/pokemon/" + item.details.id}
+   to={"/pokemon/" + item.details.id}
     key={item.details.id}
     fontSize="2xl"
     style={{ textDecoration: 'none'}}>

@@ -1,11 +1,11 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 import {
   MenuButton,
   MenuList,
   MenuItem,
   Portal,
     Menu,
-    Link,
     Button
   } from '@chakra-ui/react';
 
@@ -23,7 +23,7 @@ import {
       <MenuItem>
       <Link
       color="teal.500"
-      href="/"
+      to="/"
       fontSize="2xl"
      style={{ textDecoration: 'none'}}
       >
@@ -31,7 +31,7 @@ import {
     </Link></MenuItem>
       <MenuItem><Link
       color="teal.500"
-      href="/team"
+      to="/team"
       fontSize="2xl"
      style={{ textDecoration: 'none'}}>
       My Team

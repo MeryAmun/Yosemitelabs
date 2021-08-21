@@ -1,8 +1,8 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 import {
     Container,
-      Box,
-      Link
+      Box
     } from '@chakra-ui/react';
 import Card from './card';
 
@@ -15,7 +15,7 @@ export default function PokemonList({pokemon}) {
 <Box key={pokemon.id}>
 <Link
   color=""
-  href={"/pokemon/" + pokemon.id}
+  to={"/pokemon/" + pokemon.id}
   key={pokemon.id}
   fontSize="2xl"
   style={{ textDecoration: 'none'}}>
