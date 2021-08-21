@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+
 import {
     Container,
    Link,
@@ -9,13 +9,13 @@ import {
 } from '@chakra-ui/react';
 
 
-const MyTeam = ({details}) => {
-  const pokemon = details
+const MyTeam = () => {
+ // const pokemon = details
   //const id = pokemon.id;
-    const [myTeam, setMyTeam] = useState([]);
+    const myTeam = [];
     //const myTeam = [];
-    console.log(pokemon)
-    console.log(myTeam)
+    //console.log(pokemon)
+    //console.log(myTeam)
 
 
 

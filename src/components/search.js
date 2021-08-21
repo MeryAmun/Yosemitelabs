@@ -19,7 +19,7 @@ function Search({pokemon}) {
     
 Axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`).then(response => {
       setSearchText(response.data)
-    console.log(response)
+    //console.log(response)
     
      })
        

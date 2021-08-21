@@ -12,7 +12,7 @@ import {
       Text,
       Heading
     } from '@chakra-ui/react';
-import MyTeam from './myTeam';
+
 
 
 
@@ -22,7 +22,7 @@ export default function PokemonDetails(props) {
   //console.log(myTeam)
 
   
-     useEffect(() => {
+     
 
       Axios.get(`https://pokeapi.co/api/v2/pokemon/${props.match.params.id}`).then(response => {
         setdetails(response.data)
@@ -30,7 +30,7 @@ export default function PokemonDetails(props) {
         
          })
          
-  }, [])
+  
  
 //console.log(setdetails)
 const addPokemon = (setdetails) => {
@@ -46,9 +46,9 @@ const addPokemon = (setdetails) => {
   //       }
           };
         
-        const removePokemon = (id) => {
+        const removePokemon = (itemId) => {
           
-            setMyTeam(myTeam.filter(({id}) => id !== id));
+            setMyTeam(myTeam.filter(({id}) => id === itemId));
           
         }
         // console.log(myTeam)
@@ -70,7 +70,7 @@ const addPokemon = (setdetails) => {
       <br/>
 {
   
-      <Stat>
+      <Stat key={details.id}>
       <Box d="flex" mt="2" alignItems="center">
     <Image src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${details.id}.png`} 
     width="800px"
@@ -101,9 +101,8 @@ const addPokemon = (setdetails) => {
 
             {
              myTeam.map(item =>(
-      <Container >
+      <Container key={item.details.id}>
       <div cursor="pointer" height="100px" 
-      key={item.details.id}
       style={{display: 'flex', flexDirection: 'column'}}
       >
       <Link
@@ -112,7 +111,7 @@ const addPokemon = (setdetails) => {
     key={item.details.id}
     fontSize="2xl"
     style={{ textDecoration: 'none'}}>
-      <Box d="flex" mt="2" alignmyTeam="center">
+      <Box d="flex" mt="2" alignItems="center">
       <Image src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${details.id}.png`} 
       width="200px"
       alt={item.details.name} />    
@@ -140,7 +139,6 @@ const addPokemon = (setdetails) => {
 <br/>
 <br/>
 <br/>
-<MyTeam pokemon={details}/>
 </Container>
     )
     
