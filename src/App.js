@@ -12,6 +12,7 @@ import PokemonList from './components/pokemonList';
 import Card from './components/card';
 import PokemonDetails from './components/pokemonDetails';
 import MyTeam from './components/myTeam';
+import Search from './components/search';
 
 
 
@@ -36,7 +37,8 @@ function App() {
            <Route path='/pokemonlist'  component={PokemonList} />
            <Route path='/card'  component={Card} />
            <Route path='/pokemon/:id'  component={PokemonDetails} />
-           <Route path='/team'  component={MyTeam} />
+           <Route path='/team/:id?'  component={MyTeam} />
+           <Route path='/search' component={Search}/>
            
             </Switch>
 

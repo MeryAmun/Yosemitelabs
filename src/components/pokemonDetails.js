@@ -1,5 +1,5 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import {Link} from "react-router-dom"
 import {useState, useEffect} from 'react';
 import Axios from 'axios';
 import {
@@ -9,17 +9,22 @@ import {
     StatHelpText,
       Box,
       Button,
+      Heading,
       Text,
-      Heading
+     UnorderedList,
+      ListItem,
+      
+      
     } from '@chakra-ui/react';
+
 
 
 
 
 export default function PokemonDetails(props) {
   const [details, setdetails] = useState("");
-   const[ myTeam, setMyTeam] = useState([]);
-  //console.log(myTeam)
+   const[ addPokemon, setAddPokemon] = useState([]);
+  //console.log(addPokemon)
 
   
      
@@ -31,37 +36,36 @@ export default function PokemonDetails(props) {
          })
          
   
- 
-//console.log(setdetails)
-const addPokemon = (setdetails) => {
-  if(myTeam.length <= 6){
-    setMyTeam(prevItems => [...prevItems, {details}]);
-  }
-  
-  
-  // let pokemon = details.id
-  //       if(myTeam !== pokemon){
-  //         pokemon.push([...myTeam,{pokemon}])
-  // //console.log(myTeam)
-  //       }
-          };
-        
-        const removePokemon = (itemId) => {
+         const  pokemonAdd = (e, details) => {
+          e.preventDefault();
+          let newPokemon = {
+            details
+            
+          };
           
-            setMyTeam(myTeam.filter(({id}) => id === itemId));
+          const isPokemonPresent = addPokemon.some((item) => item.id === details.id);
+         
+          if (!isPokemonPresent) {
+            setAddPokemon((prevTeamState) => [...prevTeamState, newPokemon]);
+              }else {
+                // if not found add the new order along with the existing order
+                console.log('pokemon already exists')
+              }
+              
+         };
+        
+
+  const removePokemon = (itemId) => {
+          
+            setAddPokemon(addPokemon.filter(({id}) => id === itemId));
           
         }
-        // console.log(myTeam)
-        useEffect(() => {
-          const myTeam = JSON.parse(localStorage.getItem('myTeam'));
-          if (myTeam) {
-            setMyTeam(myTeam);
-          }
-        }, []);
+        // console.log(addPokemon)
+       
       
       useEffect(() => {
-          localStorage.setItem('myTeam', JSON.stringify(myTeam));
-        }, [myTeam]);
+          localStorage.setItem('addPokemon', JSON.stringify(addPokemon));
+        }, [addPokemon]);
 
     return (
       <Container>
@@ -69,8 +73,7 @@ const addPokemon = (setdetails) => {
       color="teal.500"> Pokemon Details</Heading>
       <br/>
 {
-  
-      <Stat key={details.id}>
+  <Stat key={details.id}>
       <Box d="flex" mt="2" alignItems="center">
     <Image src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${details.id}.png`} 
     width="800px"
@@ -88,51 +91,56 @@ const addPokemon = (setdetails) => {
 </Box>
 <StatHelpText>
 <br/>
-    <Button colorScheme="teal" mr="4" onClick={addPokemon} mt={10}>
+    <Button colorScheme="teal" mr="4" onClick={pokemonAdd} mt={10}>
       Add Pokemon
     </Button>
  
 </StatHelpText>
 </Stat>
   
+  
+      
 }
 
 <Heading mt={10}>My Team</Heading>
 
-            {
-             myTeam.map(item =>(
-      <Container key={item.details.id}>
-      <div cursor="pointer" height="100px" 
-      style={{display: 'flex', flexDirection: 'column'}}
-      >
-      <Link
+           {
+
+              addPokemon.length === 6 ? 
+            <Text>
+                You have reached  your maximum number of pokemons
+            </Text>
+            :
+             addPokemon.map(item =>(
+      <Container>
+      <UnorderedList>
+  <ListItem key={item.id} style={{ listStyleType: 'none'}}>
+  <Link
     color=""
-   to={"/pokemon/" + item.details.id}
-    key={item.details.id}
+   to={"/pokemon/" + item.id}
+    key={item.id}
     fontSize="2xl"
     style={{ textDecoration: 'none'}}>
       <Box d="flex" mt="2" alignItems="center">
       <Image src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${details.id}.png`} 
       width="200px"
-      alt={item.details.name} />    
+      alt={item.name} />    
           </Box>
-          <Text>{item.details.name}</Text>
+          <Text>{item.name}</Text>
           </Link>
-      </div>
+          <Button colorScheme="teal" onClick={removePokemon} mt={10}>
+          Remove Pokemon
+          </Button>
+  </ListItem> 
+</UnorderedList>
+       <br/>
       <br/>
-      <br/>
-      <Button colorScheme="teal" onClick={removePokemon} mt={10}>
-    Remove Pokemon
-    </Button>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-          </Container>
+    </Container>
 
     ))
     
    }
+  
 <br/>
 <br/>
 <br/>
