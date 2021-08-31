@@ -14,57 +14,75 @@ import {
 import db from '../configs/fbConfig';
 
 
-const MyTeam = () => {
+
+const MyTeam = (props) => {
   const [team, setTeam] = useState([]);
 
-   
-    window.addEventListener('load', () => {
-        Fetchdata();
-      });
+  //console.log(props)
+     window.onload = () => {
+         Fetchdata();
+       };
   
     // Fetch the required data using the get() method
     const Fetchdata = ()=>{
-        db.collection("pokemone").get().then((querySnapshot) => {
+        db.collection("pokemon").get().then((querySnapshot) => {
              
             // Loop through the data and store
             // it in array to display
             querySnapshot.forEach(element => {
-                var data = element.data();
+                var data = [element.data(),element.id];
+                //var id = element.id;
                 setTeam(arr => [...arr , data]);
-                  
+                
             });
         })
     }
-
-
-    //removepokemon
-    const removePokemon = () => {
-
-        
     
-      }
+    //console.log(team[0][1]);
+     
+    
+    //removepokemon
+    const removePokemon = (e) => {
+      const myId = team[0][1];
+      e.preventDefault();
+      db.collection('pokemon').doc(myId).delete()
+      .then((docRef) => {
+        //alert("Data Successfully Submitted");
+        //props.history.push('/')
+        window.location.reload();
+    });
+     }
+     
+
+
     return (
         <Container>
+        
             <Heading mt={10}>My Team</Heading>
             <Box d="flex" mt="2" alignItems="center"
-            justifyContent='space-evenly'
+            justifyContent='center'
             
-            flexDirection='row'>
+            flexDirection='column'>
             {
 
-                team.length === 6 ?
+                team.length > 6 ?
+                  <Box>
+                  <MyTeam/>
                   <Text>
                     You have reached  your maximum number of pokemons
                   </Text>
+                  </Box>
                   :
                 team.map((data) => (
-                    <Stat p={10} key={data.id} >
-      <Box m={1} border='red'>
-        <Image src={data.image} 
-        width="500px"
+                    <Stat p={10} key={data[1]}>
+                    
+      <Box m={1}>
+        <Image src={data[0].image.front_shiny} 
+       
+        
         alt={data.name} />    
             </Box>
-            <StatLabel fontSize="3xl">{data.name}</StatLabel>
+            <StatLabel fontSize="3xl">{data[0].name}</StatLabel>
             <Button colorScheme="teal" onClick={removePokemon} mt={10}>
                     Remove Pokemon
                   </Button>

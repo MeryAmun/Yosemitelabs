@@ -22,7 +22,7 @@ import  db from '../configs/fbConfig';
 
 export default function PokemonDetails(props) {
   const [details, setDetails] = useState([]);
-  const [addPokemon, setAddPokemon] = useState([]);
+  const [addPokemon] = useState([]);
 
   useEffect(() => {
 
@@ -30,30 +30,38 @@ export default function PokemonDetails(props) {
     //console.log(props)
     Axios.get('https://pokeapi.co/api/v2/pokemon/' + id).then(response => {
       setDetails(response.data)
-      console.log(response)
+      //console.log(response)
 
     })
-  }, [])
+  })
 
 
   const data = {
+    id:details.id,
     base_experience: details.base_experience,
     height: details.height,
-    image: details.sprites.front_shiny,
+    image: details.sprites,
     name: details.name,
-    order: details. order,
+    order: details.order,
     weight: details.weight
     
   }
-  const pokemonAdd = (e, details) => {
+  const pokemonAdd = (e) => {
     e.preventDefault();
-    db.collection("pokemone").add(data).then((docRef) => {
-    alert("Data Successfully Submitted");
+    console.log(data)
+    let newPokemon = data;
+     const isPokemonPresent = addPokemon.some((item) =>
+      item.id === data.id);
+      console.log(db)
+      if (!isPokemonPresent) {
+    db.collection("pokemon").add(newPokemon).then((docRef) => {
+    //alert("Data Successfully Submitted");
+    props.history.push('/team')
 })
 .catch((error) => {
     console.error("Error adding document: ", error);
 });
-  
+}
     // let newPokemon = {
     //   details
 
@@ -79,14 +87,6 @@ export default function PokemonDetails(props) {
 
   }, [details]);
 
-  // useEffect(()=>{
-
-  //    localStorage.getItem('team')
-    
-  //     setAddPokemon(JSON.parse(details))
-     
-
-  //   },[])
 
 
   return (
@@ -152,7 +152,7 @@ export default function PokemonDetails(props) {
                     </Box>
                     <Text>{item.name}</Text>
                   </Link>
-                  <Button colorScheme="teal" onClick={removePokemon} mt={10}>
+                  <Button colorScheme="teal"  mt={10}>
                     Remove Pokemon
                   </Button>
                 </ListItem>
