@@ -22,6 +22,7 @@ import {
   } from '@chakra-ui/react';
 import db from '../configs/fbConfig';
 import { DeleteIcon } from '@chakra-ui/icons'
+import Loading from './loading';
 
 toast.configure();
 const MyTeam = (props) => {
@@ -59,6 +60,7 @@ useEffect(() => {
       toast.success('Pokemon deleted successfully',{position: toast.POSITION.BOTTOM_CENTER,
       autoClose: 10000
       });
+      
   }).then(() => {
     
    window.location.reload();
@@ -156,8 +158,9 @@ useEffect(() => {
       </Box>
     )
     
-    } hectograms</h5>
+    }</h5>
     </PopoverBody>
+    <Loading/>
     <DeleteIcon w={5} h={5} 
         mt={10}
         onClick={() =>{removePokemon(data.uid)}} color="teal.500" />

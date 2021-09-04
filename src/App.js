@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { HashRouter, Route, Switch } from 'react-router-dom';
 import {
   Box,
   Grid,
@@ -21,7 +21,7 @@ function App() {
 
  
   return (
-    <BrowserRouter>
+    <HashRouter>
     <Navigation/>
     
       <Box textAlign="center" fontSize="xl">
@@ -44,7 +44,7 @@ function App() {
 
           </Box>
         </Container>
-    </BrowserRouter>
+    </HashRouter>
     
   );
 }

@@ -21,6 +21,7 @@ import  db from '../configs/fbConfig';
 export default function PokemonDetails(props) {
   const [details, setDetails] = useState([]);
   const [addPokemon] = useState([]);
+ 
 
   useEffect(() => {
 
