@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import Loader from "react-loader-spinner";
 export default class Loading extends React.Component {
   //other logic
@@ -7,8 +7,8 @@ export default class Loading extends React.Component {
       <Loader
         type="Puff"
         color="#00BFFF"
-        height={100}
-        width={100}
+        height={60}
+        width={60}
         timeout={5000} //3 secs
       />
     );

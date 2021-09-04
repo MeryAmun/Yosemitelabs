@@ -39,7 +39,7 @@ useEffect(() => {
 
       
     const Fetchdata = ()=>{
-      db.collection("pokemon").onSnapshot((querySnapshot) => {
+      db.collection("pokemons").onSnapshot((querySnapshot) => {
         querySnapshot.forEach(element => {
           var id = element.id;
             var data = element.data(id);
@@ -55,7 +55,7 @@ useEffect(() => {
 
     //removepokemon
     const removePokemon = (id) => {
-    db.collection('pokemon').doc(id).delete()
+    db.collection('pokemons').doc(id).delete()
     .then(() => {
       toast.success('Pokemon deleted successfully',{position: toast.POSITION.BOTTOM_CENTER,
       autoClose: 10000
