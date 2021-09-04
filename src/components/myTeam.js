@@ -27,7 +27,7 @@ import Loading from './loading';
 toast.configure();
 const MyTeam = (props) => {
   const [team, setTeam] = useState([]);
-  
+  const [isLoading, setIsLoading] = React.useState(false)
   
 useEffect(() => {
   Fetchdata();
@@ -160,10 +160,17 @@ useEffect(() => {
     
     }</h5>
     </PopoverBody>
-    <Loading/>
-    <DeleteIcon w={5} h={5} 
+    {
+      !isLoading ? (
+        <DeleteIcon w={5} h={5} 
         mt={10}
-        onClick={() =>{removePokemon(data.uid)}} color="teal.500" />
+        onClick={() =>{removePokemon(data.uid)
+          setIsLoading(true)
+        }} color="teal.500" />
+      ) : (
+        <Loading/>
+      )
+    }
         <PopoverFooter>
   <h5>Thanks for checking</h5>
   </PopoverFooter>

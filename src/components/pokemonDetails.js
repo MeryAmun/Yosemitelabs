@@ -13,7 +13,7 @@ import {
   Heading,
 } from '@chakra-ui/react';
 import  db from '../configs/fbConfig';
-
+import Loading from './loading';
 
 
 
@@ -21,7 +21,7 @@ import  db from '../configs/fbConfig';
 export default function PokemonDetails(props) {
   const [details, setDetails] = useState([]);
   const [addPokemon] = useState([]);
- 
+  const [isLoading, setIsLoading] = React.useState(false)
 
   useEffect(() => {
 
@@ -55,8 +55,8 @@ export default function PokemonDetails(props) {
     weight: details.weight
     
   }
-  const pokemonAdd = (e) => {
-    e.preventDefault();
+  const pokemonAdd = () => {
+    //e.preventDefault();
     //console.log(data)
     let newPokemon = data;
      const isPokemonPresent = addPokemon.some((item) =>
@@ -124,9 +124,19 @@ export default function PokemonDetails(props) {
           </Box>
           <StatHelpText>
             <br />
-            <Button colorScheme="teal" mr="4" onClick={pokemonAdd} mt={10}>
-              Add Pokemon
-            </Button>
+            {
+              !isLoading ? (
+                <Button colorScheme="teal" 
+                mr="4" onClick={() => {pokemonAdd()
+                  setIsLoading(true)
+                }} mt={10}>
+                  Add Pokemon
+                </Button>
+              ) : (
+                <Loading/>
+              ) 
+            }
+            
 
           </StatHelpText>
         </Stat>
