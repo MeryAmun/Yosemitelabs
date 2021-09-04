@@ -1,6 +1,7 @@
 import React from 'react';
-import {Link} from "react-router-dom"
 import Axios from 'axios';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useState, useEffect } from 'react';
 import {
   Container,
@@ -10,9 +11,6 @@ import {
   Box,
   Button,
   Heading,
-  Text,
-  UnorderedList,
-  ListItem,
 } from '@chakra-ui/react';
 import  db from '../configs/fbConfig';
 
@@ -32,30 +30,43 @@ export default function PokemonDetails(props) {
       setDetails(response.data)
       //console.log(response)
 
-    })
-  })
+    });
+    
+  });
 
 
   const data = {
-    id:details.id,
+    abilities: details.abilities,
     base_experience: details.base_experience,
+    game_indices: details.game_indices,
     height: details.height,
+    held_items: details.held_items,
+    id:details.id,
+    is_default:details.is_default,
+    location_area_encounters:details.location_area_encounters,
+    moves:details.moves,
+    specie: details.species,
     image: details.sprites,
     name: details.name,
     order: details.order,
+    stats: details.stats,
+    types: details.types,
     weight: details.weight
     
   }
   const pokemonAdd = (e) => {
     e.preventDefault();
-    console.log(data)
+    //console.log(data)
     let newPokemon = data;
      const isPokemonPresent = addPokemon.some((item) =>
       item.id === data.id);
-      console.log(db)
+      //console.log(db)
       if (!isPokemonPresent) {
-    db.collection("pokemon").add(newPokemon).then((docRef) => {
-    //alert("Data Successfully Submitted");
+    db.collection("pokemon").add(newPokemon).then(() => {
+      toast.success(`${details.name} added successfully`,{position: toast.POSITION.BOTTOM_CENTER,
+      autoClose: 10000
+      })
+    
     props.history.push('/team')
 })
 .catch((error) => {
@@ -80,12 +91,7 @@ export default function PokemonDetails(props) {
     // }
 
   };
-  
-  useEffect(()=>{
 
-    localStorage.setItem('team',JSON.stringify(details))
-
-  }, [details]);
 
 
 
@@ -109,6 +115,7 @@ export default function PokemonDetails(props) {
           <h3>Order: {details.order}</h3>
           <h3>Weight: {details.weight} hectograms</h3>
           <h5>Height: {details.height} decimetres.</h5>
+          
           <Box>
             <h3>Species</h3>
             <h3>Name: {details.name}</h3>
@@ -124,44 +131,6 @@ export default function PokemonDetails(props) {
         </Stat>
 
 
-
-      }
-      <Heading mt={10}>My Team</Heading>
-      {
-
-        addPokemon.length === 6 ?
-          <Text>
-            You have reached  your maximum number of pokemons
-          </Text>
-          :
-          addPokemon.map(item => (
-            <Container>
-              <UnorderedList>
-                <ListItem key={item.id} style={{ listStyleType: 'none' }}>
-                <Link to='/home/#section1'></Link>
-                  <Link
-                    color=""
-                    to="#section1"
-                    key={item.id}
-                    fontSize="2xl"
-                    style={{ textDecoration: 'none' }}>
-                    <Box d="flex" mt="2" alignItems="center">
-                      <Image src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${details.id}.png`}
-                        width="200px"
-                        alt={item.name} />
-                    </Box>
-                    <Text>{item.name}</Text>
-                  </Link>
-                  <Button colorScheme="teal"  mt={10}>
-                    Remove Pokemon
-                  </Button>
-                </ListItem>
-              </UnorderedList>
-              <br />
-              <br />
-            </Container>
-
-          ))
 
       }
     </Container>
