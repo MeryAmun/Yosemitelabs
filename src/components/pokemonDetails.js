@@ -56,8 +56,22 @@ export default function PokemonDetails(props) {
     
   }
   const pokemonAdd = () => {
-    //e.preventDefault();
+
     //console.log(data)
+//     let docRef = db.collection("pokemons").doc(details);
+// docRef.get().then((doc) => {
+//   if (!doc.exists) {
+//     docRef.set({
+//       details
+//     });
+//   }
+// }).then(() => {
+//   toast.success(`${details.name} added successfully`,{position: toast.POSITION.BOTTOM_CENTER,
+//   autoClose: 10000
+//   })
+
+// props.history.push('/team')
+// })
     let newPokemon = data;
      const isPokemonPresent = addPokemon.some((item) =>
       item.id === data.id);
@@ -74,23 +88,7 @@ export default function PokemonDetails(props) {
     console.error("Error adding document: ", error);
 });
 }
-    // let newPokemon = {
-    //   details
-
-    // };
-
-    // const isPokemonPresent = addPokemon.some((item) => item.id === details.id);
-
-    // if (!isPokemonPresent) {
-    //   setAddPokemon((prevTeamState) => [...prevTeamState, { ...newPokemon }]
-    //   )
-
-
-    // } else {
-    //   // if not found add the new order along with the existing order
-    //   console.log('pokemon already exists')
-    // }
-
+    
   };
 
 
@@ -130,7 +128,7 @@ export default function PokemonDetails(props) {
                 mr="4" onClick={() => {pokemonAdd()
                   setIsLoading(true)
                 }} mt={10}>
-                  Add Pokemon
+                  Add to Team
                 </Button>
               ) : (
                 <Loading/>

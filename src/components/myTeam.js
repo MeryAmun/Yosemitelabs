@@ -73,8 +73,9 @@ useEffect(() => {
 
     return (
         <Container>
-        
-            <Heading mt={10}>My Team</Heading>
+        <Heading mt={10}
+      color="teal.500">Welcome to Pokemon Web App User Stories</Heading>
+            <Heading mt={10}>Manage Team</Heading>
             <Box d="flex" mt="2" alignItems="center"
             justifyContent='center'
             
@@ -89,7 +90,7 @@ useEffect(() => {
         alt={data.data.name} /> 
       <Popover m={4}>
   <PopoverTrigger>
-    <Button>{data.data.name}</Button>
+    <Button>{data.data.name} Details</Button>
   </PopoverTrigger>
   <PopoverContent>
     <PopoverArrow />
