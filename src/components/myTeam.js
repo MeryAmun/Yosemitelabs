@@ -1,6 +1,7 @@
 import React from 'react';
 import {useState, useEffect} from 'react';
 import { toast } from 'react-toastify';
+import moment from 'moment'
 import 'react-toastify/dist/ReactToastify.css';
 import {
     Stat,
@@ -23,6 +24,7 @@ import {
 import db from '../configs/fbConfig';
 import { DeleteIcon } from '@chakra-ui/icons'
 import Loading from './loading';
+import Search from './search';
 
 toast.configure();
 const MyTeam = (props) => {
@@ -73,6 +75,7 @@ useEffect(() => {
 
     return (
         <Container>
+        <Search/>
         <Heading mt={10}
       color="teal.500">Welcome to Pokemon Web App User Stories</Heading>
             <Heading mt={10}>Manage Team</Heading>
@@ -81,8 +84,8 @@ useEffect(() => {
             
             flexDirection='column'>
             {
-
-               
+        
+        
                 team.map((data) => (
                     <Stat p={10} key={data.uid} m={4}>
                     <Box>
@@ -90,7 +93,10 @@ useEffect(() => {
         alt={data.data.name} /> 
       <Popover m={4}>
   <PopoverTrigger>
+    <Box m={4}>
     <Button>{data.data.name} Details</Button>
+    <Button mt={4}>created {moment(data.data.createdAt.toDate()).calendar()}</Button>
+    </Box>
   </PopoverTrigger>
   <PopoverContent>
     <PopoverArrow />

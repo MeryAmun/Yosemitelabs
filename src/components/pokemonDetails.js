@@ -52,7 +52,8 @@ export default function PokemonDetails(props) {
     order: details.order,
     stats: details.stats,
     types: details.types,
-    weight: details.weight
+    weight: details.weight,
+    createdAt: new Date()
     
   }
   const pokemonAdd = () => {
@@ -69,7 +70,6 @@ export default function PokemonDetails(props) {
 //   toast.success(`${details.name} added successfully`,{position: toast.POSITION.BOTTOM_CENTER,
 //   autoClose: 10000
 //   })
-
 // props.history.push('/team')
 // })
     let newPokemon = data;
@@ -77,7 +77,7 @@ export default function PokemonDetails(props) {
       item.id === data.id);
       //console.log(db)
       if (!isPokemonPresent) {
-    db.collection("pokemons").add(newPokemon).then(() => {
+    db.collection("pokemons").add(newPokemon).orderBy("createdAt", "desc").then(() => {
       toast.success(`${details.name} added successfully`,{position: toast.POSITION.BOTTOM_CENTER,
       autoClose: 10000
       })
