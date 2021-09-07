@@ -25,7 +25,7 @@ import db from '../configs/fbConfig';
 import { DeleteIcon } from '@chakra-ui/icons'
 import Loading from './loading';
 import Search from './search';
-import { query, orderBy, limit } from "firebase/firestore";  
+
 
 
 toast.configure();
@@ -92,6 +92,7 @@ useEffect(() => {
                     <Stat p={10} key={data.uid} m={4}>
                     <Box>
       <Image src={data.data.image.front_shiny} 
+      width="200px"
         alt={data.data.name} /> 
       <Popover m={4}>
   <PopoverTrigger>
