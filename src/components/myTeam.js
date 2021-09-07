@@ -25,6 +25,8 @@ import db from '../configs/fbConfig';
 import { DeleteIcon } from '@chakra-ui/icons'
 import Loading from './loading';
 import Search from './search';
+import { query, orderBy, limit } from "firebase/firestore";  
+
 
 toast.configure();
 const MyTeam = (props) => {

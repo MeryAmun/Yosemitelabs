@@ -77,11 +77,11 @@ export default function PokemonDetails(props) {
       item.id === data.id);
       //console.log(db)
       if (!isPokemonPresent) {
-    db.collection("pokemons").add(newPokemon).orderBy("createdAt", "desc").then(() => {
+    db.collection("pokemons").add(newPokemon).then(() => {
       toast.success(`${details.name} added successfully`,{position: toast.POSITION.BOTTOM_CENTER,
       autoClose: 10000
       })
-    
+      db.collection('pokemons').orderBy('createdAt').limit(6)
     props.history.push('/team')
 })
 .catch((error) => {
